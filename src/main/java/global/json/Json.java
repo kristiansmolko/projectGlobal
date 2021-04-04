@@ -6,7 +6,9 @@ import org.json.simple.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Json {
 
@@ -25,6 +27,15 @@ public class Json {
             array.add(sensor);
         }
         object.put("data", array);
+        return object;
+    }
+
+    public JSONObject getGeneralData(HashMap<String, Float> map){
+        JSONObject object = new JSONObject();
+        for (Map.Entry<String, Float> entry : map.entrySet()){
+            object.put(entry.getKey(), entry.getValue());
+        }
+        object.put("actual_date", format.format(new Date()));
         return object;
     }
 }
