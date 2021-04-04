@@ -1,18 +1,18 @@
 package global.database;
 
+import global.entity.Sensor;
 import global.log.Log;
-import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class Database {
-    private final String getGeneralData = "SELECT ";
-    private final String getDataBySensorType = "SELECT ";
+    private final String getGeneralData = "SELECT sensor_type, sensor_unit, sensor_value, MAX(date_time) FROM measurement GROUP BY sensor_type;";
+    private final String getDataBySensorType = "SELECT * FROM measurement WHERE sensor_type LIKE ?";
     Log log = new Log();
 
     public Connection getConnection() throws IOException, SQLException {
@@ -34,19 +34,38 @@ public class Database {
         //this is method to get general data for landing page
         try (Connection connection = getConnection()) {
             if (connection != null){
+                PreparedStatement ps = connection.prepareStatement(getGeneralData);
+
 
             }
         } catch (Exception e) { log.error(e.toString()); }
         return null;
     }
 
-    public String getDataBySensorType(String sensorType){
+    public List<Sensor> getDataBySensorType(String sensorType){
         //this is method to get data from specific sensor
         try (Connection connection = getConnection()) {
             if (connection != null){
-
+                PreparedStatement ps = connection.prepareStatement(getDataBySensorType);
+                ps.setString(1, sensorType);
+                return executeSelect(ps);
             }
         } catch (Exception e) { log.error(e.toString()); }
         return null;
+    }
+
+    private List<Sensor> executeSelect(PreparedStatement ps){
+        List<Sensor> list = new ArrayList<>();
+        try {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                String sensor_type = rs.getString("sensor_type");
+                String sensor_unit = rs.getString("sensor_unit");
+                Float sensor_value = rs.getFloat("sensor_value");
+                Timestamp date_time = rs.getTimestamp("date_time");
+                list.add(new Sensor(sensor_type, sensor_unit, sensor_value, new Date(date_time.getTime())));
+            }
+        } catch (Exception e) { log.error(e.toString()); }
+        return list;
     }
 }
