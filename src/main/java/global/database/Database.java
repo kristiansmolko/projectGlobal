@@ -2,7 +2,6 @@ package global.database;
 
 import global.entity.Sensor;
 import global.log.Log;
-import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;

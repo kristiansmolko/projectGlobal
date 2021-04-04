@@ -28,9 +28,8 @@ public class Controller {
 
     @GetMapping("/v1/get_general_stats")
     public ResponseEntity<String> getGeneral(){
-        //dat.getGeneralData();
-
-        return null;
+        JSONObject object = j.getGeneralData(dat.getGeneralData());
+        return ok.contentType(MediaType.APPLICATION_JSON).body(object.toJSONString());
     }
 
     @GetMapping(value = "/v1/get_latest", params = "sensor")
