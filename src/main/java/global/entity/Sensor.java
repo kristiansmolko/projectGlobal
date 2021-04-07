@@ -17,6 +17,12 @@ public class Sensor {
         this.date = date;
     }
 
+    public Sensor(String type, String unit, float value) {
+        this.type = type;
+        this.unit = unit;
+        this.value = value;
+    }
+
     public String getType() {
         return type;
     }
