@@ -3,7 +3,5 @@
 #get packages
 mvn package
 
-mvn dependency:tree
-
 #run program
 mvn spring-boot:run
