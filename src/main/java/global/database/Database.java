@@ -42,12 +42,13 @@ public class Database {
                 while (rs.next()){
                     String type = null;
                     switch(rs.getInt("sensor_type")){
-                        case 1: type = "rainfall";
-                        case 2: type = "temperature";
-                        case 3: type = "humidity";
-                        case 4: type = "pressure";
+                        case 1: type = "rainfall"; break;
+                        case 2: type = "temperature"; break;
+                        case 3: type = "humidity"; break;
+                        case 4: type = "pressure"; break;
                     }
                     map.put(type, rs.getFloat("sensor_value"));
+                    System.out.println(map);
                 }
             }
         } catch (Exception e) { log.error(e.toString()); }
