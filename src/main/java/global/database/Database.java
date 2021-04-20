@@ -32,7 +32,7 @@ public class Database {
         return null;
     }
 
-    public HashMap getGeneralData(){
+    public HashMap<String, Float> getGeneralData(){
         //this is method to get general data for landing page
         HashMap<String, Float> map = new HashMap<>();
         try (Connection connection = getConnection()) {
