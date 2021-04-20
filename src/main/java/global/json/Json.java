@@ -30,7 +30,7 @@ public class Json {
         return object;
     }
 
-    public JSONObject getGeneralData(HashMap<String, Float> map){
+    public JSONObject getGeneralData(Map<String, Float> map){
         JSONObject object = new JSONObject();
         object.put("map", map);
         for (Map.Entry<String, Float> entry : map.entrySet()){

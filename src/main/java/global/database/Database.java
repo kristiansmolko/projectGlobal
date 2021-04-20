@@ -6,10 +6,8 @@ import global.log.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
+import java.sql.Date;
+import java.util.*;
 
 public class Database {
     private final String getGeneralData = "SELECT d.sensor_type, d.sensor_unit, d.sensor_value, d.date_time FROM tmeasurementv1 d " +
@@ -32,9 +30,9 @@ public class Database {
         return null;
     }
 
-    public HashMap<String, Float> getGeneralData(){
+    public Map<String, Float> getGeneralData(){
         //this is method to get general data for landing page
-        HashMap<String, Float> map = new HashMap<>();
+        Map<String, Float> map = new HashMap<>();
         try (Connection connection = getConnection()) {
             if (connection != null){
                 PreparedStatement ps = connection.prepareStatement(getGeneralData);
