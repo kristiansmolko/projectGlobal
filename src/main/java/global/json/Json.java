@@ -32,6 +32,7 @@ public class Json {
 
     public JSONObject getGeneralData(HashMap<String, Float> map){
         JSONObject object = new JSONObject();
+        object.put("map", map);
         for (Map.Entry<String, Float> entry : map.entrySet()){
             object.put(entry.getKey(), entry.getValue());
         }
