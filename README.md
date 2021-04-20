@@ -39,6 +39,23 @@ To connect to local mysql database:
         <version>8.0.23</version>
 ```
 
+To run script on Linux/Ubuntu:
+```maven
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>2.4.4</version>
+    </parent>
+```
+and
+```maven
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>2.4.4</version>
+        </plugin>
+```
+
 ## Usage
 
 First of all, to run Spring server, you need to specify, which class will be running the server.
@@ -102,6 +119,31 @@ Now you are in your database and you can start creating your own tables.
 CREATE TABLE name(...);
 ```
 
+### Script
+
+Setup.txt is a simple script which can be run on Linux. Containing just few commands it's easy to run it on your Linux/Ubuntu.
+
+First step is allocating dependencies.
+
+```ubuntu
+mvn package
+```
+
+After that, you can run the program.
+```ubuntu
+mvn spring-boot:run
+```
+
+To simply run the script, small change is needed on Linux:
+```ubuntu
+chmod +x setup.txt
+```
+
+And finally script is ready to serve.
+```ubuntu
+./setup.txt
+```
+
 ### Use
 Now when everything is set, SpringBoot server and MYSQL database, using your default browser or apps like [Postman](https://www.postman.com/downloads/) you can test this project.
 
@@ -117,3 +159,5 @@ To get specified result, check what path you need in java:
 Also when in default browser, just type: *http://localhost:8080/path/to*
 
 *localhost:8080* is port for SpringBoot server. If taken by other service, change port in java application.
+
+
