@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Properties;
 
 public class Database {
-    private final String getGeneralData = "SELECT d.sensor_type, d.sensor_unit, d.sensor_value, d.date_time FROM measurement d " +
-            "WHERE d.date_time IN (SELECT MAX(d2.date_time) FROM measurement d2 WHERE d2.sensor_type=d.sensor_type);";
-    private final String getDataBySensorType = "SELECT * FROM measurement WHERE sensor_type LIKE ?";
+    private final String getGeneralData = "SELECT d.sensor_type, d.sensor_unit, d.sensor_value, d.date_time FROM tmeasurementv1 d " +
+            "WHERE d.date_time IN (SELECT MAX(d2.date_time) FROM tmeasurementv1 d2 WHERE d2.sensor_type=d.sensor_type);";
+    private final String getDataBySensorType = "SELECT * FROM tmeasurementv1 WHERE sensor_type LIKE ?";
     Log log = new Log();
 
     public Connection getConnection() throws IOException, SQLException {
