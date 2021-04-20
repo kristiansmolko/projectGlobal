@@ -40,7 +40,14 @@ public class Database {
                 PreparedStatement ps = connection.prepareStatement(getGeneralData);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()){
-                    map.put(rs.getString("sensor_type"), rs.getFloat("sensor_value"));
+                    String type = null;
+                    switch(rs.getInt("sensor_type")){
+                        case 1: type = "rainfall";
+                        case 2: type = "temperature";
+                        case 3: type = "humidity";
+                        case 4: type = "pressure";
+                    }
+                    map.put(type, rs.getFloat("sensor_value"));
                 }
             }
         } catch (Exception e) { log.error(e.toString()); }
